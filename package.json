@@ -1,18 +1,38 @@
 {
   "name": "@carolinedanslesnuages/emmanuelle",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "L'accessibilité RGAA vérifiée à chaque pull request : axe-core et des vérifications propres au RGAA dans Chromium, rangées par critère officiel, avec une référence pour ne bloquer que les nouveaux défauts.",
   "type": "module",
-  "bin": { "emmanuelle": "bin/emmanuelle.mjs" },
-  "files": ["bin", "src", "action.yml"],
-  "engines": { "node": ">=20" },
-  "scripts": { "test": "node --test test/*.test.mjs" },
+  "bin": {
+    "emmanuelle": "bin/emmanuelle.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "action.yml"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
   "dependencies": {
     "@carolinedanslesnuages/marguerite": "github:Carolinedanslesnuages/marguerite#930194003cc7dff297955360a0c377d85d9d3afa",
     "axe-core": "4.10.2",
     "playwright": "1.56.0"
   },
-  "keywords": ["accessibility", "rgaa", "a11y", "axe-core", "playwright", "github-action"],
-  "repository": { "type": "git", "url": "git+https://github.com/Carolinedanslesnuages/emmanuelle.git" },
+  "keywords": [
+    "accessibility",
+    "rgaa",
+    "a11y",
+    "axe-core",
+    "playwright",
+    "github-action"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carolinedanslesnuages/emmanuelle.git"
+  },
   "license": "MIT"
 }
