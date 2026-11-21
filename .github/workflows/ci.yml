@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests dans Chromium
+    # Playwright 1.56 ne prend pas en charge Ubuntu 26.04 : version du système fixée.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+
+  # Emmanuelle checks her own test page, the way a project would use her.
+  emmanuelle:
+    name: Accessibilité (Emmanuelle)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: ./
+        with:
+          dossier: test/fixtures/site
+
+  dependances:
+    name: Dépendances (Madeleine)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: Carolinedanslesnuages/madeleine@v1
+
+  titre:
+    name: Titre de PR (Conventional Commits)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Carolinedanslesnuages/constance/titre-pr@v1
+        with:
+          rose: "true"
+
+  taille:
+    name: Taille des fichiers (une responsabilité par fichier)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: Carolinedanslesnuages/constance/taille-fichiers@v1
+
+  nommage:
+    name: Nommage des fichiers (kebab-case, PascalCase.vue)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: Carolinedanslesnuages/constance/nommage-fichiers@v1
+
+  anti-fuite:
+    name: Anti-fuite (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: Carolinedanslesnuages/constance/anti-fuite@v1

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page accessible</title>
+  <style>
+    body { font: 16px/1.5 sans-serif; color: #1a1a1a; background: #fff; margin: 0; padding: 16px; }
+    a:focus, button:focus, input:focus { outline: 3px solid #6a1b9a; outline-offset: 2px; }
+    .skip-link { position: absolute; left: -9999px; }
+    .skip-link:focus { left: 8px; top: 8px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
+  <header><nav aria-label="Principale"><a href="/">Accueil</a></nav></header>
+  <main id="main-content">
+    <h1>Page accessible</h1>
+    <p>Un paragraphe lisible.</p>
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Logo du projet">
+    <form>
+      <label for="email">Adresse e-mail</label>
+      <input id="email" type="email" autocomplete="email">
+      <button type="submit">Envoyer</button>
+    </form>
+  </main>
+</body>
+</html>

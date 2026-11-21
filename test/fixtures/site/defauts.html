@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page avec des défauts</title>
+  <style>
+    body { font: 16px/1.5 sans-serif; margin: 0; }
+    * { outline: none; }
+    .pale { color: #c8c8c8; background: #fff; }
+    .wide { width: 1000px; }
+    .clipped { height: 24px; width: 120px; overflow: hidden; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { display: inline-block; animation: spin 1s linear infinite; }
+  </style>
+</head>
+<body>
+  <button type="button">Menu</button>
+  <h1>Défauts</h1>
+  <p class="pale">Texte trop pâle.</p>
+  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+  <input type="text">
+  <div class="wide">Une zone trop large.</div>
+  <p class="clipped">Un texte assez long qui sera coupé quand on espace les lettres.</p>
+  <span class="spinner">✳</span>
+</body>
+</html>

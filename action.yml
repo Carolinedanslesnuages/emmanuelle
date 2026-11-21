@@ -1,0 +1,42 @@
+name: Emmanuelle — accessibilité RGAA
+description: Ouvre le site construit dans Chromium, lance axe-core et des vérifications propres au RGAA (lien d'évitement, focus visible, 320 px, zoom, espacement du texte, animations), range chaque constat par critère officiel et annote la PR.
+author: Carolinedanslesnuages
+
+inputs:
+  dossier:
+    description: Dossier du site construit (ex. dist), servi le temps de la vérification.
+    default: "dist"
+  url:
+    description: Ou l'adresse d'un site déjà lancé (prioritaire sur « dossier »).
+    default: ""
+  pages:
+    description: Pages à vérifier, séparées par des espaces.
+    default: "/"
+  reference:
+    description: Fichier des défauts connus ; seuls les nouveaux défauts bloquent.
+    default: ".emmanuelle-reference.json"
+  strict:
+    description: Échouer aussi sur les avertissements.
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Installer Emmanuelle et Chromium
+      shell: bash
+      run: |
+        npm ci --omit=dev --no-audit --no-fund --prefix "${{ github.action_path }}"
+        cd "${{ github.action_path }}" && npx playwright install --with-deps chromium
+    - name: Vérifier l'accessibilité
+      shell: bash
+      env:
+        SITE_FOLDER: ${{ inputs.dossier }}
+        SITE_URL: ${{ inputs.url }}
+        PAGES: ${{ inputs.pages }}
+        REFERENCE: ${{ inputs.reference }}
+        STRICT: ${{ inputs.strict }}
+      run: |
+        options=(--pages "$PAGES" --reference "$REFERENCE")
+        if [ -n "$SITE_URL" ]; then options+=(--url "$SITE_URL"); else options+=(--dossier "$SITE_FOLDER"); fi
+        [ "$STRICT" = "true" ] && options+=(--strict)
+        node "${{ github.action_path }}/bin/emmanuelle.mjs" "${options[@]}"
