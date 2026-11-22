@@ -1,5 +1,5 @@
 name: Emmanuelle — accessibilité RGAA
-description: Ouvre le site construit dans Chromium, lance axe-core et des vérifications propres au RGAA (lien d'évitement, focus visible, 320 px, zoom, espacement du texte, animations), range chaque constat par critère officiel et annote la PR.
+description: "Vérifie l'accessibilité du site construit à chaque PR : axe-core et des contrôles propres au RGAA, rangés par critère."
 author: Carolinedanslesnuages
 
 inputs:
@@ -45,3 +45,7 @@ runs:
         [ "$STRICT" = "true" ] && options+=(--strict)
         [ "$SINGLE_PAGE" = "true" ] && options+=(--monopage)
         node "${{ github.action_path }}/bin/emmanuelle.mjs" "${options[@]}"
+
+branding:
+  icon: eye
+  color: purple

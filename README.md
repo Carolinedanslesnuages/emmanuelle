@@ -34,6 +34,34 @@ fait pas, puis **range chaque constat sous son critère du RGAA 4.1.2**, avec so
 d'un titre ou d'un intitulé, l'ordre de lecture ou la restitution par un lecteur d'écran se
 vérifient à la main, avec la méthodologie officielle de chaque critère.
 
+## À quoi ça ressemble
+
+Une page de boutique écrite trop vite (images sans alternative, bouton vide, pas de langue) :
+
+```text
+✗ /
+  7.1 Chaque script est-il, si nécessaire, compatible avec les technologies d’assistance ?
+    ✗ Buttons must have discernible text  [button]
+  3.2 Dans chaque page web, le contraste entre la couleur du texte et la couleur de son arrière-plan est-il suffisamment élevé (hors cas particuliers) ?
+    ✗ Elements must meet minimum color contrast ratio thresholds  [p]
+  8.3 Dans chaque page web, la langue par défaut est-elle présente ?
+    ✗ <html> element must have a lang attribute  [html]
+  1.1 Chaque image porteuse d’information a-t-elle une alternative textuelle ?
+    ✗ Images must have alternative text  [img[src$="logo.png"]]
+    ✗ Images must have alternative text  [img[src$="panier.svg"]]
+  6.2 Dans chaque page web, chaque lien a-t-il un intitulé ?
+    ✗ Links must have discernible text  [a]
+  9.1 Dans chaque page web, l’information est-elle structurée par l’utilisation appropriée de titres ?
+    ✗ Page should contain a level-one heading  [html]
+  12.7 Dans chaque page web, un lien d’évitement ou d’accès rapide à la zone de contenu principal est-il présent (hors cas particuliers) ?
+    ✗ le premier lien («  ») ne mène à aucune zone de la page.
+
+1 page(s) · 8 erreur(s) · 0 avertissement(s)
+Rappel : un contrôle automatique ne couvre qu'une partie du RGAA. Le reste se vérifie à la main.
+```
+
+Chaque constat est rangé sous le critère officiel du RGAA 4.1.2 auquel il se rattache.
+
 ## Dans une pull request (GitHub Actions)
 
 ```yaml
