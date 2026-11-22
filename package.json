@@ -1,6 +1,6 @@
 {
   "name": "@carolinedanslesnuages/emmanuelle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "L'accessibilité RGAA vérifiée à chaque pull request : axe-core et des vérifications propres au RGAA dans Chromium, rangées par critère officiel, avec une référence pour ne bloquer que les nouveaux défauts.",
   "type": "module",
   "bin": {
