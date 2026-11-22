@@ -2,6 +2,9 @@
 
 L'accessibilité RGAA vérifiée à chaque pull request.
 
+Le nom rend hommage à Emmanuelle Laborit, comédienne sourde, Molière de la révélation théâtrale
+en 1993, qui dirige l'International Visual Theatre et défend la langue des signes française.
+
 Emmanuelle ouvre votre site construit dans un vrai navigateur (Chromium), lance
 [axe-core](https://github.com/dequelabs/axe-core) et des vérifications propres au RGAA qu'axe ne
 fait pas, puis **range chaque constat sous son critère du RGAA 4.1.2**, avec son texte officiel
