@@ -83,10 +83,13 @@ export async function checkTextSpacing(page, pageUrl) {
     const cssPath = eval(pathSource);
     return [...document.querySelectorAll('body *')]
       .filter((element) => {
-        // Visually hidden text (for screen readers only) is cut on purpose.
+        // Visually hidden text (for screen readers only) is cut on purpose: tiny box, or masked
+        // by clip / clip-path, like a skip link waiting for the focus.
         const bounds = element.getBoundingClientRect();
         if (bounds.width <= 1 || bounds.height <= 1) return false;
         const style = getComputedStyle(element);
+        const masked = /^rect\(/.test(style.clip) || /^inset\((50|100)%/.test(style.clipPath);
+        if (masked) return false;
         const hidesOverflow = /hidden|clip/.test(style.overflowX + style.overflowY) || style.textOverflow === 'ellipsis';
         const hasText = [...element.childNodes].some((node) => node.nodeType === 3 && node.textContent.trim());
         return hidesOverflow && hasText && (element.scrollWidth > element.clientWidth + 1 || element.scrollHeight > element.clientHeight + 1);

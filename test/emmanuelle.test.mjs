@@ -42,6 +42,21 @@ test('une page accessible ne donne rien', async () => {
   assert.match(result.stdout, /0 erreur\(s\) · 0 avertissement\(s\)/);
 });
 
+test('10.12 : un lien d’évitement masqué jusqu’au focus n’est pas du texte coupé', async () => {
+  const result = await runCli(['--dossier', FIXTURE_SITE, '--pages', '/evitement-masque.html']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.doesNotMatch(result.stdout, /10\.12/);
+});
+
+test('application monopage : une adresse sans fichier reçoit index.html', async () => {
+  const route = ['--dossier', FIXTURE_SITE, '--pages', '/reservations/42'];
+  assert.match((await runCli(route)).stderr, /ne s'ouvre pas \(404\)/, 'sans --monopage : introuvable');
+  const singlePage = await runCli([...route, '--monopage']);
+  assert.equal(singlePage.status, 0, singlePage.stdout + singlePage.stderr);
+  assert.match(singlePage.stdout, /✓ \/reservations\/42/);
+  assert.match((await runCli(['--dossier', FIXTURE_SITE, '--pages', '/absente.html', '--monopage'])).stderr, /ne s'ouvre pas \(404\)/, 'un fichier absent reste introuvable');
+});
+
 test('une page avec des défauts : chacun rangé sous son critère RGAA', async () => {
   const result = await runCli(['--dossier', FIXTURE_SITE, '--pages', '/defauts.html', '--json']);
   assert.equal(result.status, 1, result.stderr);

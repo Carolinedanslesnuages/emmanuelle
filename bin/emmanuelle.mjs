@@ -13,6 +13,7 @@ Usage :
   emmanuelle reference [options]    enregistre les défauts actuels comme connus
 
   --dossier <chemin>   site construit à servir (défaut : dist)
+  --monopage          application monopage : une adresse sans fichier reçoit index.html
   --url <adresse>      ou un site déjà lancé (ex. http://localhost:5173)
   --pages "<p1> <p2>"  pages à vérifier, séparées par des espaces (défaut : /)
   --reference <fich.>  défauts connus (défaut : .emmanuelle-reference.json)
@@ -38,6 +39,7 @@ function parseOptions(args) {
     else if (argument === '--url') options.url = args[++index];
     else if (argument === '--pages') options.pages = String(args[++index] || '').split(/\s+/).filter(Boolean);
     else if (argument === '--reference') options.reference = args[++index];
+    else if (argument === '--monopage') options.singlePage = true;
     else if (argument === '--strict') options.strict = true;
     else if (argument === '--json') options.json = true;
     else throw new Error(`Option inconnue : ${argument}. Tapez « emmanuelle aide ».`);
@@ -90,7 +92,7 @@ async function main() {
   let baseUrl = options.url;
   if (!baseUrl) {
     if (!existsSync(options.folder)) throw new Error(`Dossier introuvable : ${options.folder}. Construisez le site, ou indiquez --dossier ou --url.`);
-    server = await serveFolder(options.folder);
+    server = await serveFolder(options.folder, { singlePage: Boolean(options.singlePage) });
     baseUrl = server.baseUrl;
   }
   try {
