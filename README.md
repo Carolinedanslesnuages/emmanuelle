@@ -24,7 +24,7 @@ fait pas, puis **range chaque constat sous son critère du RGAA 4.1.2**, avec so
 | 10.7 | Chaque élément atteint avec Tab change d'apparence quand il a le focus. |
 | 10.11 | À 320 px de large, la page ne défile pas horizontalement. |
 | 10.4 | À 640 px de large (zoom à 200 %), la page ne défile pas horizontalement. |
-| 10.12 | Avec l'espacement du texte augmenté, aucun texte n'est coupé. |
+| 10.12 | Avec l'espacement du texte augmenté, aucun texte n'est coupé. Un texte masqué exprès (lien d'évitement en attente du focus, texte pour lecteur d'écran) n'est pas compté. |
 | 13.8 | Les animations sans fin sont signalées (avertissement) : prévoir une pause. |
 
 **Un contrôle automatique ne couvre qu'une partie du RGAA.** La pertinence d'une alternative,
@@ -57,6 +57,7 @@ Ubuntu 26.04. Chaque nouveau défaut est annoté dans la PR et résumé dans l'o
 | `pages` | `/` | Pages à vérifier, séparées par des espaces. |
 | `reference` | `.emmanuelle-reference.json` | Défauts connus (voir plus bas). |
 | `strict` | `false` | Échouer aussi sur les avertissements. |
+| `monopage` | `false` | Application monopage (Vue Router, React Router…) : une adresse sans fichier, comme `/reservations/42`, reçoit `index.html`. Les autres pages de l'application peuvent alors être vérifiées. |
 
 ## Sur votre ordinateur
 

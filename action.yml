@@ -18,6 +18,9 @@ inputs:
   strict:
     description: Échouer aussi sur les avertissements.
     default: "false"
+  monopage:
+    description: Application monopage (Vue Router, React Router…) servie depuis « dossier » ; une adresse sans fichier reçoit index.html.
+    default: "false"
 
 runs:
   using: composite
@@ -35,8 +38,10 @@ runs:
         PAGES: ${{ inputs.pages }}
         REFERENCE: ${{ inputs.reference }}
         STRICT: ${{ inputs.strict }}
+        SINGLE_PAGE: ${{ inputs.monopage }}
       run: |
         options=(--pages "$PAGES" --reference "$REFERENCE")
         if [ -n "$SITE_URL" ]; then options+=(--url "$SITE_URL"); else options+=(--dossier "$SITE_FOLDER"); fi
         [ "$STRICT" = "true" ] && options+=(--strict)
+        [ "$SINGLE_PAGE" = "true" ] && options+=(--monopage)
         node "${{ github.action_path }}/bin/emmanuelle.mjs" "${options[@]}"

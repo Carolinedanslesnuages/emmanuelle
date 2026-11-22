@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lien d'évitement masqué</title>
+  <style>
+    body { font: 16px/1.5 sans-serif; color: #1a1a1a; background: #fff; margin: 0; padding: 16px; }
+    a:focus { outline: 3px solid #6a1b9a; outline-offset: 2px; }
+    /* Masqué comme le fait VitePress : boîte avec marge intérieure, découpée par clip-path. */
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 8px 16px; white-space: nowrap; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); }
+    .visually-hidden:focus { width: auto; height: auto; clip: auto; clip-path: none; top: 8px; left: 8px; background: #fff; }
+  </style>
+</head>
+<body>
+  <a class="visually-hidden" href="#main-content">Aller au contenu</a>
+  <main id="main-content">
+    <h1>Lien d'évitement masqué jusqu'au focus</h1>
+    <p>Un paragraphe lisible.</p>
+  </main>
+</body>
+</html>
