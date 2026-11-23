@@ -5,7 +5,10 @@ import { chromium } from 'playwright';
 import { criterion, criterionForAxeRule } from './criteria.mjs';
 import { checkSkipLink, checkFocusVisible, checkReflow, checkTextSpacing, checkEndlessAnimations } from './page-checks.mjs';
 
-const AXE_SOURCE = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
+const resolveFromHere = createRequire(import.meta.url).resolve;
+const AXE_SOURCE = readFileSync(resolveFromHere('axe-core/axe.min.js'), 'utf8');
+/** axe-core's own French translation, so that messages read like the RGAA criteria above them. */
+const AXE_FRENCH_LOCALE = JSON.parse(readFileSync(resolveFromHere('axe-core/locales/fr.json'), 'utf8'));
 /** WCAG A and AA, plus the heading rules RGAA 9.1 needs (tagged "best-practice" by axe). */
 const AXE_OPTIONS = {
   runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] },
@@ -14,7 +17,10 @@ const AXE_OPTIONS = {
 
 async function axeFindings(page) {
   await page.addScriptTag({ content: AXE_SOURCE });
-  const violations = await page.evaluate(async (options) => (await window.axe.run(document, options)).violations, AXE_OPTIONS);
+  const violations = await page.evaluate(async ({ options, locale }) => {
+    window.axe.configure({ locale });
+    return (await window.axe.run(document, options)).violations;
+  }, { options: AXE_OPTIONS, locale: AXE_FRENCH_LOCALE });
   return violations.flatMap((violation) => violation.nodes.slice(0, 10).map((node) => {
     const mapped = criterionForAxeRule(violation.id);
     return {
