@@ -13,7 +13,7 @@ fait pas, puis **range chaque constat sous son critère du RGAA 4.1.2**, avec so
 ```text
 ✗ /
   1.1 Chaque image porteuse d’information a-t-elle une alternative textuelle ?
-    ✗ Images must have alternative text  [img]
+    ✗ Les images doivent avoir une alternative textuelle  [img]
   12.7 Dans chaque page web, un lien d’évitement ou d’accès rapide à la zone de contenu principal est-il présent (hors cas particuliers) ?
     ✗ le premier élément atteint au clavier n'est pas un lien d'évitement (c'est « Menu »).
 ```
@@ -41,18 +41,18 @@ Une page de boutique écrite trop vite (images sans alternative, bouton vide, pa
 ```text
 ✗ /
   7.1 Chaque script est-il, si nécessaire, compatible avec les technologies d’assistance ?
-    ✗ Buttons must have discernible text  [button]
+    ✗ Les boutons doivent avoir un texte perceptible  [button]
   3.2 Dans chaque page web, le contraste entre la couleur du texte et la couleur de son arrière-plan est-il suffisamment élevé (hors cas particuliers) ?
-    ✗ Elements must meet minimum color contrast ratio thresholds  [p]
+    ✗ Les éléments doivent avoir un contraste de couleurs suffisant  [p]
   8.3 Dans chaque page web, la langue par défaut est-elle présente ?
-    ✗ <html> element must have a lang attribute  [html]
+    ✗ L’élément <html> doit avoir un attribut lang  [html]
   1.1 Chaque image porteuse d’information a-t-elle une alternative textuelle ?
-    ✗ Images must have alternative text  [img[src$="logo.png"]]
-    ✗ Images must have alternative text  [img[src$="panier.svg"]]
+    ✗ Les images doivent avoir une alternative textuelle  [img[src$="logo.png"]]
+    ✗ Les images doivent avoir une alternative textuelle  [img[src$="panier.svg"]]
   6.2 Dans chaque page web, chaque lien a-t-il un intitulé ?
-    ✗ Links must have discernible text  [a]
+    ✗ Les liens doivent avoir un texte perceptible  [a]
   9.1 Dans chaque page web, l’information est-elle structurée par l’utilisation appropriée de titres ?
-    ✗ Page should contain a level-one heading  [html]
+    ✗ La page doit contenir un titre de niveau 1  [html]
   12.7 Dans chaque page web, un lien d’évitement ou d’accès rapide à la zone de contenu principal est-il présent (hors cas particuliers) ?
     ✗ le premier lien («  ») ne mène à aucune zone de la page.
 

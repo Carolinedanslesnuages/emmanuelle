@@ -63,6 +63,8 @@ test('une page avec des défauts : chacun rangé sous son critère RGAA', async 
   const report = JSON.parse(result.stdout);
   const criteria = new Set(report.pages[0].constats.map((finding) => finding.critere));
   for (const expected of ['1.1', '3.2', '8.3', '11.1', '12.7', '10.7', '10.11', '10.4', '10.12', '13.8']) assert.ok(criteria.has(expected), `critère ${expected} attendu, trouvés : ${[...criteria].join(', ')}`);
+  const missingAlternative = report.pages[0].constats.find((finding) => finding.critere === '1.1');
+  assert.match(missingAlternative.message, /^Les images doivent avoir une alternative textuelle/, 'les messages d’axe-core sont en français');
   const animation = report.pages[0].constats.find((finding) => finding.critere === '13.8');
   assert.equal(animation.niveau, 'avertissement');
   assert.deepEqual(Object.keys(report), ['pages', 'total', 'corriges', 'echec']);
