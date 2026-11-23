@@ -93,8 +93,8 @@ Ubuntu 26.04. Chaque nouveau défaut est annoté dans la PR et résumé dans l'o
 ## Sur votre ordinateur
 
 ```sh
-npx github:Carolinedanslesnuages/emmanuelle --dossier dist --pages "/ /contact.html"
-npx github:Carolinedanslesnuages/emmanuelle --url http://localhost:5173
+npx @carolinedanslesnuages/emmanuelle --dossier dist --pages "/ /contact.html"
+npx @carolinedanslesnuages/emmanuelle --url http://localhost:5173
 ```
 
 Chromium doit être installé une fois : `npx playwright install chromium`.
@@ -104,7 +104,7 @@ Chromium doit être installé une fois : `npx playwright install chromium`.
 On ne corrige pas tout un site en une PR. Enregistrez les défauts actuels comme connus :
 
 ```sh
-npx github:Carolinedanslesnuages/emmanuelle reference --dossier dist
+npx @carolinedanslesnuages/emmanuelle reference --dossier dist
 ```
 
 Le fichier `.emmanuelle-reference.json` est commité. Ensuite, seuls les **nouveaux** défauts
